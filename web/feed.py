@@ -2,10 +2,7 @@ from rss_parser import Parser
 from requests import get
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
-from web.models import *
-import logging
-
-logger = logging.getLogger(__name__)
+from .models import *
 
 def update(url) :
 

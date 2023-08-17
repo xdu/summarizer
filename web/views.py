@@ -12,5 +12,5 @@ def update(request):
     return HttpResponse("Feed updated")
 
 def display(request):
-    items = Item.objects.all()[:10]
+    items = Item.objects.all().order_by('-pubDate')
     return render(request, "report.html", { "items": items })
