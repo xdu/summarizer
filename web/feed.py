@@ -2,6 +2,7 @@ from rss_parser import Parser
 from requests import get
 from django.core.validators import URLValidator
 from django.core.exceptions import ValidationError, ObjectDoesNotExist
+from dateutil.parser import parse
 from .models import *
 
 def update(url) :
@@ -29,8 +30,9 @@ def update(url) :
         except ObjectDoesNotExist :
             item = Item.objects.create(guid=e.guid)
         item.title = e.title
-        item.description = e.description
-        # item.pubDate = e.pub_date.content
+        # item.description = e.description
+        if e.pub_date.content is not None:
+            item.pubDate = parse(e.pub_date.content)
         item.link = e.link
 
         item.feed = feed
